@@ -53,8 +53,10 @@ export async function pushBlog(params: PushBlogParams): Promise<void> {
 	const treeItems: TreeItem[] = []
 
 	if (allLocalImages.length > 0) {
-		toast.info('正在上传图片...')
+		toast.info(`共需上传 ${allLocalImages.length} 张图片...`)
+		let idx = 1
 		for (const { img, id } of allLocalImages) {
+			toast.info(`正在上传第 ${idx++} 张图片...`)
 			const hash = img.hash || (await hashFileSHA256(img.file))
 			const ext = getFileExt(img.file.name)
 			const filename = `${hash}${ext}`
@@ -86,21 +88,21 @@ export async function pushBlog(params: PushBlogParams): Promise<void> {
 		coverPath = cover.url
 	}
 
-	toast.info('正在创建文件...')
+	toast.info('正在创建文章内容...')
 
-    const dateStr = form.date || formatDateTimeLocal()
-    const frontmatter = {
-        title: form.title,
-        description: form.summary,
-        pubDate: dateStr,
-        image: coverPath,
-        draft: form.hidden,
-        tags: form.tags,
-        categories: form.categories
-    }
-    
-    const finalContent = stringifyFrontmatter(frontmatter, mdToUpload)
+	const dateStr = form.date || formatDateTimeLocal()
+	const frontmatter = {
+		title: form.title,
+		description: form.summary,
+		pubDate: dateStr,
+		image: coverPath,
+		draft: form.hidden,
+		tags: form.tags,
+		categories: form.categories
+	}
+	const finalContent = stringifyFrontmatter(frontmatter, mdToUpload)
 
+	toast.info('正在上传文章内容...')
 	const mdBlob = await createBlob(token, GITHUB_CONFIG.OWNER, GITHUB_CONFIG.REPO, toBase64Utf8(finalContent), 'base64')
 	treeItems.push({
 		path: `src/content/blog/${form.slug}.md`,
