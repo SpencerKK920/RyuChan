@@ -17,6 +17,9 @@ import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
 // https://astro.build/config
 export default defineConfig({
+  vite: {
+    envPrefix: ['PUBLIC_', 'NEXT_PUBLIC_'],
+  },
   site: USER_SITE,
   output: "static",
   style: {
