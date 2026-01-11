@@ -1,4 +1,19 @@
 ---
+interface MusicItem {
+    url: string;
+    cover: string;
+    title: string;
+    artist: string;
+}
+
+interface Props {
+    src?: string;
+    cover?: string;
+    title?: string;
+    artist?: string;
+    list?: MusicItem[];
+}
+
 const { src, cover, title, artist, list } = Astro.props;
 const currentSrc = src || (list && list[0] ? list[0].url : "");
 const currentCover = cover || (list && list[0] ? list[0].cover : "");
