@@ -65,7 +65,7 @@ site:
       target: _self
     - id: entertainment
       text: 娱乐
-     
+      href: “#”
       svg: material-symbols:play-circle-outline-rounded
       target: _self
       subItems:
