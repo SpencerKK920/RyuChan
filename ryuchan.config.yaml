@@ -65,12 +65,12 @@ site:
       target: _self
     - id: entertainment
       text: 娱乐
-      href: '/anime'
+      href: '#'
       svg: material-symbols:play-circle-outline-rounded
       target: _self
       subItems:
         - id: anime
-          text: 追番
+          text: 影视
           href: /anime
           svg: material-symbols:movie-outline
           target: _self
